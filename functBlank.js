@@ -1,5 +1,5 @@
 var x = () => {
-  let url = prompt("URL:");
+  let url = prompt("[Leave Empty For Test] Full Page URL:", "https://www.youtube.com/embed/dQw4w9WgXcQ?si=vXnvWoRK-zVutTSp");
   function create(url) {
 
     var win = window.open();
