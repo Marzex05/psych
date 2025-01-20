@@ -1,4 +1,4 @@
-var x = () => {
+var mask = () => {
   setTimeout(() => {
     let url = prompt("[Leave Empty For Test] Full Page URL:", "https://www.youtube.com/embed/dQw4w9WgXcQ?si=vXnvWoRK-zVutTSp");
     function create(url) {
